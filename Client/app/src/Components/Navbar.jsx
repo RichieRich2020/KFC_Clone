@@ -48,6 +48,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { AuthContext } from '../Context/AuthContext/AuthContext';
+import axios from 'axios';
 
 const getData = () => {
   return fetch(`http://localhost:3501/menu`).then((res) => res.json());
@@ -58,31 +59,47 @@ const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [placement, setPlacement] = React.useState('left');
   const [location, setLocation] = useState('');
-  const { authState, loginUser, logoutUser } = useContext(AuthContext);
   const { state } = useContext(CartContext);
   const [item, SetItem] = useState([]);
-  const [cartitem, Setcartitem] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [inp, setInp] = useState('');
   const [searchdata, setSearchData] = useState([]);
-  // const [locationn, setlocation] = useState('');
   const { locationn } = useContext(CartContext);
   const navigate = useNavigate();
-  const { setdelet, delet } = useContext(AuthContext);
+  const {
+    setdelet,
+    delet,
+    Setcartitem,
+    cartitem,
+    authState,
+    loginUser,
+    logoutUser,
+  } = useContext(AuthContext);
+
+  const REACT_APP_BASEURL = process.env.REACT_APP_BASEURL;
+  // ${REACT_APP_BASEURL}
 
   useEffect(() => {
     getdatafromback();
-    fetch(`http://localhost:3501/menu/addtocart`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        Setcartitem(res.length);
-        setdelet(!delet);
-      });
-  }, [delet]);
+    if (authState.token) {
+      // console.log(authState);
+      const config = {
+        method: 'get',
+        url: `${REACT_APP_BASEURL}/menu/addtocart`,
+        headers: { Authorization: 'Bearer ' + authState.token },
+      };
+      axios(config)
+        .then(function (response) {
+          // console.log(response);
+          Setcartitem(response.data.length);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }, [delet, cartitem, authState.token]);
 
-  console.log(inp);
+  // console.log(inp);
 
   const getdatafromback = () => {
     setIsLoading(true);
@@ -211,7 +228,7 @@ const Navbar = () => {
                       <Image width='100px' src={vfc_logo} />
                     </NavLink>
                     <NavLink to='/menu'>
-                      <b fo>Menu</b>
+                      <b>Menu</b>
                     </NavLink>
                     <NavLink to='/deals'>
                       <b>Deals</b>
@@ -397,7 +414,7 @@ const Navbar = () => {
                       width='50px'
                       src='https://images.ctfassets.net/wtodlh47qxpt/6qtBVFuno7pdwOQ9RIvYm9/d13e9b7242980972cf49beddde2cc295/bucket_cart_icon.svg'
                     />
-                    <b>{cartitem}</b>
+                    <b> {authState.token ? cartitem : 0}</b>
                   </Flex>
                 </NavLink>
               </Flex>

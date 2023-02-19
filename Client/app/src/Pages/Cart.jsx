@@ -6,33 +6,43 @@ import CartProduct from './CartProduct';
 import empty_bucket from '../Assets/images/empty_bucket.gif';
 import { NavLink } from 'react-router-dom';
 import SubTotal from '../Components/SubTotal';
-
+import axios from 'axios';
 const Cart = () => {
   // const { state } = useContext(CartContext);
   let [state, setstate] = useState([]);
   // let [delet, setdelet] = useState(false);
   let [total, settotal] = useState(0);
-  const { setdelet, delet } = useContext(AuthContext);
+  const { setdelet, delet, authState } = useContext(AuthContext);
   // useEffect(()=>{
   //   fetch()
   // })
+
+  const REACT_APP_BASEURL = process.env.REACT_APP_BASEURL;
+  // ${REACT_APP_BASEURL}
   useEffect(() => {
-    fetch(`http://localhost:3501/menu/addtocart`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        // console.log(res);
-        setstate(res);
-        // console.log(res);
-        // setstate(res);
-        // console.log(res);
-        let sum = 0;
-        res.map((e) => {
-          sum += e.price * e.quantity;
+    if (authState.token) {
+      // console.log(authState);
+      const config = {
+        method: 'get',
+        url: `${REACT_APP_BASEURL}/menu/addtocart`,
+        headers: { Authorization: 'Bearer ' + authState.token },
+      };
+      axios(config)
+        .then(function (response) {
+          setstate(response.data);
+          // console.log(response.data);
+          // setstate(res);
+          // console.log(res);
+          let sum = 0;
+          response.data.map((e) => {
+            sum += e.price * e.quantity;
+          });
+          settotal(sum);
+        })
+        .catch(function (error) {
+          console.log(error);
         });
-        settotal(sum);
-      });
+    }
   }, [delet]);
 
   return (
@@ -73,7 +83,12 @@ const Cart = () => {
             <Box>
               <Heading className='checkout__title'>Your Food Cart</Heading>
               {state?.map((item) => (
-                <CartProduct {...item} setdelet={setdelet} delet={delet} />
+                <CartProduct
+                  {...item}
+                  setdelet={setdelet}
+                  delet={delet}
+                  key={item._id}
+                />
               ))}
             </Box>
           )}

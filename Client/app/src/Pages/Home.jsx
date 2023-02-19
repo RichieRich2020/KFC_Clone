@@ -31,8 +31,10 @@ import { Link, NavLink } from 'react-router-dom';
 import PickUpLocaton from '../Components/PickUpLocaton';
 import VerticalLine from '../Components/VerticalLine';
 
+const REACT_APP_BASEURL = process.env.REACT_APP_BASEURL;
+// ${REACT_APP_BASEURL}
 const browseCategoriesDataFromApi = () => {
-  return fetch(`http://localhost:3501/menu/categories`).then((res) =>
+  return fetch(`${REACT_APP_BASEURL}/menu/categories`).then((res) =>
     res.json()
   );
 };

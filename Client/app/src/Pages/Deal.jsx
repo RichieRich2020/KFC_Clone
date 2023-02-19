@@ -15,9 +15,11 @@ import { NavLink } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 // import SingleCard from "../Components/SingleCard";
 
+const REACT_APP_BASEURL = process.env.REACT_APP_BASEURL;
+// ${REACT_APP_BASEURL}
 const dealDataFromApi = () => {
-  return fetch(`https://vfc-database.vercel.app/products?cate=hotDeals`).then(
-    (res) => res.json()
+  return fetch(`${REACT_APP_BASEURL}/menu/categories`).then((res) =>
+    res.json()
   );
 };
 
@@ -94,7 +96,7 @@ const Deal = () => {
             w='90%'
             boxShadow='base'>
             <Link to='/menu'>
-              <Image src={item.images} w='100%' borderRadius='8px 8px 0 0' />
+              <Image src={item.image} w='100%' borderRadius='8px 8px 0 0' />
               <Heading m='15px auto' size='sm'>
                 {item.name}
               </Heading>

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import loader_gif from '../Assets/images/loader_gif.gif';
 import SingleCard from './SingleCard';
 
+const REACT_APP_BASEURL = process.env.REACT_APP_BASEURL;
+// ${REACT_APP_BASEURL}
 const dealDataFromApi = () => {
-  return fetch(`http://localhost:3501/menu?cate=burgers`).then((res) =>
+  return fetch(`${REACT_APP_BASEURL}/menu?cate=burgers`).then((res) =>
     res.json()
   );
 };

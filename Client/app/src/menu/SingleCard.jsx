@@ -17,7 +17,8 @@ import Icon_Add_to_Cart from '../Assets/images/Icon_Add_to_Cart.svg';
 import { AuthContext } from '../Context/AuthContext/AuthContext';
 
 const SingleCard = ({ id, images, name, type, price, description }) => {
-  const { authState } = useContext(AuthContext);
+  const { authState, Setcartitem } = useContext(AuthContext);
+  // const { setdelet, delet, Setcartitem } = useContext(AuthContext);
   // let [statee, setstatee] = useState({
   //   images: ' ',
   //   name: ' ',
@@ -26,6 +27,8 @@ const SingleCard = ({ id, images, name, type, price, description }) => {
   //   description: ' ',
   // });
 
+  const REACT_APP_BASEURL = process.env.REACT_APP_BASEURL;
+  // ${REACT_APP_BASEURL}
   function sub() {
     console.log(authState);
     let obj = {
@@ -40,12 +43,13 @@ const SingleCard = ({ id, images, name, type, price, description }) => {
     const config = {
       method: 'post',
       data: { ...obj },
-      url: `http://localhost:3501/menu/addtocart`,
+      url: `${REACT_APP_BASEURL}/menu/addtocart`,
       headers: { Authorization: 'Bearer ' + authState.token },
     };
     axios(config)
       .then(function (response) {
-        console.log(response);
+        // console.log(response, 'sassa');
+        Setcartitem(response.data.length);
       })
       .catch(function (error) {
         console.log(error);

@@ -25,9 +25,18 @@ function AuthContextProvider({ children }) {
   };
   let [delet, setdelet] = useState(false);
 
+  const [cartitem, Setcartitem] = useState(0);
   return (
     <AuthContext.Provider
-      value={{ authState: state, loginUser, logoutUser, setdelet, delet }}>
+      value={{
+        authState: state,
+        loginUser,
+        logoutUser,
+        setdelet,
+        delet,
+        Setcartitem,
+        cartitem,
+      }}>
       {children}
     </AuthContext.Provider>
   );

@@ -19,6 +19,8 @@ const CartProduct = ({
   // const { state, dispatch } = useContext(CartContext);
   console.log(id, name, images, price, type, quantity, description);
   const { authState } = useContext(AuthContext);
+  const REACT_APP_BASEURL = process.env.REACT_APP_BASEURL;
+  // ${REACT_APP_BASEURL}
   return (
     <Box
       m='40px auto'
@@ -61,7 +63,7 @@ const CartProduct = ({
             onClick={() => {
               const config = {
                 method: 'delete',
-                url: `http://localhost:3501/menu/addtocartdelete/${_id}`,
+                url: `${REACT_APP_BASEURL}/menu/addtocartdelete/${_id}`,
                 headers: { Authorization: 'Bearer ' + authState.token },
               };
               axios(config)

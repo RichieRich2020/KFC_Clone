@@ -27,6 +27,9 @@ const Login = () => {
     password: '',
     gender: '',
   });
+
+  const REACT_APP_BASEURL = process.env.REACT_APP_BASEURL;
+  // ${REACT_APP_BASEURL}
   const [password, setPassword] = useState('');
   const toast = useToast();
   const [loading, setLoading] = useState(false);
@@ -36,7 +39,7 @@ const Login = () => {
     // console.log(email, password);
     e.preventDefault();
     // setLoading(true);
-    fetch('http://localhost:3501/users/register', {
+    fetch(`${REACT_APP_BASEURL}/users/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

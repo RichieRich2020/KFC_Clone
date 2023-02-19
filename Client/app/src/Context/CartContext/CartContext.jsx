@@ -1,14 +1,10 @@
 import { createContext, useReducer } from 'react';
 import React, { useEffect, useState } from 'react';
-import reducer from '../CartContext/reducer';
-const initialState = {
-  basket: [],
-};
 
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  // const [state, dispatch] = useReducer(reducer, initialState);
 
   const [locationn, setlocation] = useState('');
 
@@ -47,7 +43,7 @@ const CartContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <CartContext.Provider value={{ initialState, state, locationn, dispatch }}>
+    <CartContext.Provider value={{ locationn }}>
       {children}
     </CartContext.Provider>
   );

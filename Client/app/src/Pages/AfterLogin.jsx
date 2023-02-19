@@ -71,9 +71,12 @@ const AfterLogin = () => {
     if (!data.email || !data.password) {
       alert('fill all inputs');
     }
+
+    const REACT_APP_BASEURL = process.env.REACT_APP_BASEURL;
+    // ${REACT_APP_BASEURL}
     // console.log(data);
     axios
-      .post('http://localhost:3501/users/login', {
+      .post(`${REACT_APP_BASEURL}/users/login`, {
         ...data,
       })
       .then(function (response) {
@@ -88,6 +91,15 @@ const AfterLogin = () => {
         navigate('/');
       })
       .catch(function (error) {
+        toast({
+          position: 'top',
+          title: 'wrong email id or password.',
+          description: ' Try again',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+        // navigate('/login');
         console.log(error);
       });
   }

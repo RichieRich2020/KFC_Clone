@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import CurrencyFormat from "react-currency-format";
 // import { useStateValue } from "./StateProvider";
-import { getBasketTotal } from '../Context/CartContext/reducer';
 import { CartContext } from '../Context/CartContext/CartContext';
 import { Box, Heading } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
