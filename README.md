@@ -14,7 +14,7 @@ KFC is a global chicken restaurant brand with a rich, decades-long history of su
 - Boothstrap
 - Material UI
 - CSS
-- backend (vercel)
+- backend (cyccyclic.sh)
 
 ## Functionality
 
