@@ -21,7 +21,6 @@ const CartContextProvider = ({ children }) => {
             return res.json();
           })
           .then((ress) => {
-            // return data;
             // console.log(ress.locality);
             setlocation(ress.locality);
           })
