@@ -19,6 +19,7 @@ KFC is a global chicken restaurant brand with a rich, decades-long history of su
 ## Functionality
 
 - Muilt users
+- get current location of user
 - Authentication
 - Add to cart
 - Payment Page with Discount Functionality
