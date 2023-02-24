@@ -38,12 +38,6 @@ KFC is a global chicken restaurant brand with a rich, decades-long history of su
 
 - Payment page , One Time Password verification page.
 
-
-    
-#### Hard Coded Card details for payment section
-
-- COD
-
 #### Website Presentation :
 ![KFC-webite](https://user-images.githubusercontent.com/103980322/207100936-c7db110f-3de7-413c-ab6f-6876ca1afb75.png)
 
