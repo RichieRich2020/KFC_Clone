@@ -70,9 +70,9 @@ const SingleCard = ({ id, images, name, type, price, description }) => {
           <HStack fontSize='13px'>
             <Flex m='10px 0' gap={2}>
               {type === 'Veg' ? (
-                <Image src={veg} alt={type} />
+                <Image src={veg} alt={type} loading='lazy' />
               ) : (
-                <Image src={non_veg} alt={type} />
+                <Image src={non_veg} alt={type} loading='lazy' />
               )}
               {type}
             </Flex>
