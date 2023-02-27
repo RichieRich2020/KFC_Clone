@@ -8,7 +8,6 @@ const CartContextProvider = ({ children }) => {
 
   const [locationn, setlocation] = useState('');
 
-  // console.log(state.basket)
   useEffect(() => {
     const success = async (position) => {
       const latitude = position.coords.latitude;
@@ -21,7 +20,6 @@ const CartContextProvider = ({ children }) => {
             return res.json();
           })
           .then((ress) => {
-            // console.log(ress.locality));
             setlocation(ress.locality);
           })
           .catch((error) => {
