@@ -36,6 +36,7 @@ const CartContextProvider = ({ children }) => {
       navigator.geolocation.getCurrentPosition(success, error);
     } else {
       // root.textContent = "Geolocation isn't supported by your browser";
+      // root.textContent = "Geolocation isn't supported by your browser";
     }
   }, []);
 
